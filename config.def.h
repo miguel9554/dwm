@@ -105,7 +105,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_q,      quitprompt,           {0} },
 	{ MODKEY|ShiftMask,             XK_Insert,      spawn,           {.v = screenshotcmd } },
 	/* Keybindings for Media play/pause/next/previous */
 	{ 0, 				XF86XK_AudioPlay, 		spawn, 	{.v = medplaypausecmd } },
