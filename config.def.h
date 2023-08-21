@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include <X11/XF86keysym.h>
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -62,6 +63,13 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "zutty", NULL };
 static const char *screenshotcmd[]  = { "scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`'", NULL};
 
+/* Control Media Players */
+static const char *medplaypausecmd[] = { "playerctl", "play-pause", NULL };
+static const char *mednextcmd[] = { "playerctl", "next", NULL };
+static const char *medprevcmd[] = { "playerctl", "previous", NULL };
+static const char *upvol[]   = { "pamixer", "--increase", "5",     NULL };
+static const char *downvol[] = { "pamixer", "--decrease", "5",     NULL };
+static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -99,6 +107,14 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_Insert,      spawn,           {.v = screenshotcmd } },
+	/* Keybindings for Media play/pause/next/previous */
+	{ 0, 				XF86XK_AudioPlay, 		spawn, 	{.v = medplaypausecmd } },
+	{ 0, 				XF86XK_AudioNext, 		spawn, 	{.v = mednextcmd } },
+	{ 0, 				XF86XK_AudioPrev, 		spawn, 	{.v = medprevcmd } },
+	{ 0,                       	XF86XK_AudioLowerVolume, 	spawn, 	{.v = downvol } },
+	{ 0,                       	XF86XK_AudioMute, 		spawn, 	{.v = mutevol } },
+	{ 0,                       	XF86XK_AudioRaiseVolume, 	spawn, 	{.v = upvol   } },
+
 };
 
 /* button definitions */
