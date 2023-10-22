@@ -70,8 +70,9 @@ static const char *downvol[] = { "pamixer", "--decrease", "5",     NULL };
 static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
 
 /* To use light add this to the constant definition section. Thanks Hritik14. */
-static const char *light_up[] = {"sudo", "/usr/bin/light", "-A", "5", NULL};
-static const char *light_down[] = {"sudo", "/usr/bin/light", "-U", "5", NULL};
+/* User needs to be in video group for this to work. */
+static const char *light_up[] = {"/usr/bin/light", "-A", "5", NULL};
+static const char *light_down[] = {"/usr/bin/light", "-U", "5", NULL};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
