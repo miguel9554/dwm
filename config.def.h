@@ -71,6 +71,11 @@ static const char *upvol[]   = { "pamixer", "--increase", "5",     NULL };
 static const char *downvol[] = { "pamixer", "--decrease", "5",     NULL };
 static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
 
+/* To use light add this to the constant definition section. Thanks Hritik14. */
+/* User needs to be in video group for this to work. */
+static const char *light_up[] = {"/usr/bin/light", "-A", "5", NULL};
+static const char *light_down[] = {"/usr/bin/light", "-U", "5", NULL};
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -114,6 +119,8 @@ static const Key keys[] = {
 	{ 0,                       	XF86XK_AudioLowerVolume, 	spawn, 	{.v = downvol } },
 	{ 0,                       	XF86XK_AudioMute, 		spawn, 	{.v = mutevol } },
 	{ 0,                       	XF86XK_AudioRaiseVolume, 	spawn, 	{.v = upvol   } },
++       { 0,                            XF86XK_MonBrightnessUp,         spawn,  {.v = light_up} },
++       { 0,                            XF86XK_MonBrightnessDown,       spawn,  {.v = light_down} },
 
 };
 
