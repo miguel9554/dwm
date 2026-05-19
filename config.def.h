@@ -73,6 +73,11 @@ static const char *screenshotcmd[] = {
     "scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`'",
     NULL
 };
+static const char *selectscreenshotcmd[] = {
+    "/bin/sh", "-c",
+    "scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`'",
+    NULL
+};
 
 /* Control Media Players */
 static const char *medplaypausecmd[] = { "playerctl", "play-pause", NULL };
@@ -123,6 +128,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quitprompt,           {0} },
 	{ 0,                            XK_Insert,      spawn,           {.v = screenshotcmd } },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,           {.v = selectscreenshotcmd } },
 	/* Keybindings for Media play/pause/next/previous */
 	{ 0, 				XF86XK_AudioPlay, 		spawn, 	{.v = medplaypausecmd } },
 	{ 0, 				XF86XK_AudioNext, 		spawn, 	{.v = mednextcmd } },
